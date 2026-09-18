@@ -1,0 +1,21 @@
+# Local SDK path (do not commit secrets)
+local.properties
+
+# Gradle
+.gradle/
+.kotlin/
+build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+dist/
+.tmp-smoke/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Kotlin
+*.kotlin_module

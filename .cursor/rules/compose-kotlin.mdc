@@ -1,0 +1,16 @@
+---
+description: Jetpack Compose and Kotlin UI conventions for fandom-reader
+globs: "**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# Compose / Kotlin UI
+
+- Kotlin 2.x + `org.jetbrains.kotlin.plugin.compose`; no `kotlinCompilerExtensionVersion`
+- Material 3 only (`androidx.compose.material3.*`), not Material 2
+- Hoist state; Screen (stateless) + Route/ViewModel pattern
+- Collect with `collectAsStateWithLifecycle()`, not bare `collectAsState()`
+- Lazy lists MUST use stable `key` (and `contentType` when useful)
+- No `GlobalScope`, no `runBlocking` on main, no public `MutableState` / `MutableStateFlow` from VM API
+- Prefer type-safe Navigation Compose
+- Reader screens: immersive by default; chrome only on explicit toggle

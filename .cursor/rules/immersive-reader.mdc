@@ -1,0 +1,14 @@
+---
+description: Immersive reader UX constraints
+globs: "**/reader/**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# Immersive reader
+
+- Default view = text only (no persistent toolbar, FAB, badges, promo chips)
+- Reveal essential chrome on tap: progress, chapter prev/next, font/theme
+- Persist and restore reading progress per work
+- If `textRu` exists for chapter, show it by default; else original
+- Support EPUB and FB2 offline from local storage
+- Prefer calm typography; avoid decorative clutter in the reading surface

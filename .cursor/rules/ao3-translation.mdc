@@ -1,0 +1,16 @@
+---
+description: AO3 translation pipeline and Gemini provider rules
+globs: "**/translation/**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# AO3 translation
+
+- Always go through `TranslationProvider`
+- Primary: Gemini (Flash-Lite default); CI: Fake only
+- Translate: title, summary, chapter narrative
+- Keep `canonicalKey` for fandom/pairing; optional `displayRu` only for UI
+- Cache per chapter; resume must skip completed chapters
+- Never set title/author to Unknown / Yandex.Translate as translation output
+- Store API key in encrypted prefs; never log the key
+- Chunk long chapters; backoff on 429

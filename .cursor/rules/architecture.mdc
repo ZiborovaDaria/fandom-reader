@@ -1,0 +1,14 @@
+---
+description: Architecture and module boundaries for fandom-reader
+globs: "**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# Architecture
+
+- Modules: `:app`, `:core:domain`, `:core:data`, `:core:ui`, features, `:source:api|ao3|ficbook`
+- Domain has no Android/Room/OkHttp dependencies
+- Data implements repositories; features depend inward
+- Source adapters implement `:source:api` only; do not parse AO3 inside Ficbook module
+- Room entities stay in `:core:data`; map to domain models at boundary
+- Prefer hand-written fakes in tests for repository/source/translator interfaces

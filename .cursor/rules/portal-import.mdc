@@ -1,0 +1,26 @@
+---
+description: AO3 and Ficbook import parsing rules
+globs: "**/source/**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# Portal import
+
+## Classification
+- AO3: publisher "Archive of Our Own" and/or `archiveofourown.org/works/{id}`
+- Ficbook: `ficbook.net` in rights/title page
+- Else: Other → Other shelf
+
+## AO3 EPUB
+- Primary: preface fields Fandom, Relationships, Summary
+- `/` = romantic pairing, `&` = platonic
+- Do not treat flat OPF `dc:subject` as typed primary source
+- Fixture: `Next_Best_Thing.epub`
+
+## Ficbook EPUB
+- Primary: `title.xhtml` labels «Фэндом», «Пэйринг и персонажи», description
+- Fixture: any of the three ficbook sample EPUBs
+
+## Damaged AO3 FB2
+- Best-effort body header / ao3 URLs; never crash import
+- Do not trust title-info when author is translator placeholder

@@ -1,0 +1,14 @@
+---
+description: Testing conventions for fandom-reader
+globs: "**/test*/**/*.{kt,kts}"
+alwaysApply: false
+---
+
+# Testing
+
+- Prefer fakes over mocks for Source/Repository/Translator
+- Use Turbine for multi-emission Flow asserts; Truth for assertions
+- Parser tests MUST use fixtures + golden JSON (AO3 Next_Best_Thing, Ficbook samples)
+- Translation unit tests MUST use FakeTranslationProvider (no live Gemini)
+- Room: in-memory DB in unit/androidTest as appropriate
+- Compose UI tests: prefer semantics; `testTag` only when needed; prefer Compose test v2 APIs when available
