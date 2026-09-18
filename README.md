@@ -50,6 +50,5 @@ Domain не зависит от Android; data реализует репозит�
 ## Документация
 
 - [docs/analysis/overview.md](docs/analysis/overview.md) — разбор образцов книг и архитектурных решений
-- [fixtures/README.md](fixtures/README.md) — layout для локальных EPUB/FB2 и golden JSON (книги в git не хранятся)
 - [openspec/specs/](openspec/specs/) — спецификации возможностей (library, import, translation, reader, themes)
 - [AGENTS.md](AGENTS.md) — правила для агентов и разработчиков
