@@ -1,20 +1,59 @@
 # fandom-reader
 
-Личная Android-читалка фанфиков: сортировка по фэндому и пейрингам, импорт AO3 + Ficbook, перевод AO3→RU (Gemini), immersive reader, полка «Прочее».
+Личная Android-читалка фанфиков: библиотека по фэндомам и пейрингам, импорт с AO3 и Ficbook, перевод англоязычных работ на русский, immersive reader для EPUB и FB2.
 
-## Статус
+## О проекте
 
-Планирование: OpenSpec change `android-fandom-reader`  
-Путь: `C:\MyProjects\openspec\changes\android-fandom-reader\`
+Приложение собирает локальную библиотеку фанфиков с устройства и помогает читать их офлайн. Книги с распознанными метаданными попадают на полку **Фанфики** и сортируются по фэндому и пейрингу; всё остальное — на полку **Прочее**, без потери доступа к тексту.
 
-Реализация приложения ещё не начата. Есть образцы книг, `AGENTS.md`, `.cursor/rules`, `docs/analysis`.
+Импорт понимает типичные экспорты **Archive of Our Own** и **Ficbook**: для AO3 метаданные берутся из структурированного preface (фэндомы, отношения `/` и `&`), для Ficbook — из подписей на title page («Фэндом», «Пэйринг и персонажи»). Фильтрация и группировка идут по каноническим ключам, а не по переведённым строкам.
 
-## Документы
+Для англоязычных AO3-работ доступен перевод через **Gemini** (заголовок, аннотация, главы) с кэшированием результата для офлайн-чтения. В тестах используется детерминированный fake-провайдер — live API в CI не нужен.
 
-- [docs/analysis/overview.md](docs/analysis/overview.md)
-- [fixtures/README.md](fixtures/README.md)
-- OpenSpec: proposal / design / specs / tasks
+Читалка заточена под длинное чтение: по умолчанию на экране только текст, элементы управления появляются по тапу — прогресс, оглавление, тема и размер шрифта, стрелки глав, возврат в библиотеку.
 
-## Следующий шаг
+## Возможности
 
-`/opsx-apply` или просьба применить change `android-fandom-reader`.
+- **Библиотека** — полки «Фанфики» и «Прочее», поиск, фильтры по фэндому/пейрингу, сортировка, карточка произведения с метаданными
+- **Импорт** — EPUB/FB2 с устройства, классификация AO3 / Ficbook / Other, сканирование папок
+- **Перевод** — Gemini (и временный Cursor-провайдер), настройки ключей в зашифрованном хранилище
+- **Читалка** — EPUB и FB2 офлайн, сохранение прогресса, темы Paper/Sepia/Night
+- **Оформление** — Material 3, тёплая «бумажная» тема, выбор акцентного цвета оболочки
+
+## Стек
+
+- Kotlin 2.x, Jetpack Compose, Material 3
+- Hilt + KSP, Room, Coroutines/Flow, DataStore
+- OkHttp + Jsoup — разбор HTML/EPUB порталов
+- minSdk 26
+
+## Модули
+
+```
+:app
+:core:domain · :core:data · :core:ui
+:feature:library · :feature:import · :feature:reader · :feature:translation
+:source:api · :source:ao3 · :source:ficbook
+```
+
+Domain не зависит от Android; data реализует репозитории; source-адаптеры изолированы за `:source:api`.
+
+## Сборка и тесты
+
+```bash
+./gradlew :app:assembleDebug
+./gradlew test
+```
+
+Локальный путь к Android SDK — в `local.properties` (файл не коммитится).
+
+## Документация
+
+- [docs/analysis/overview.md](docs/analysis/overview.md) — разбор образцов книг и архитектурных решений
+- [fixtures/README.md](fixtures/README.md) — эталонные EPUB/FB2 для парсеров и bake-off перевода
+- [openspec/specs/](openspec/specs/) — спецификации возможностей (library, import, translation, reader, themes)
+- [AGENTS.md](AGENTS.md) — правила для агентов и разработчиков
+
+## Образцы книг
+
+В корне репозитория и в `fixtures/` лежат тестовые EPUB/FB2 (AO3, Ficbook, повреждённые meta для регрессии). Они нужны для парсеров, golden-тестов и сравнения качества перевода.
