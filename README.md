@@ -50,10 +50,6 @@ Domain не зависит от Android; data реализует репозит�
 ## Документация
 
 - [docs/analysis/overview.md](docs/analysis/overview.md) — разбор образцов книг и архитектурных решений
-- [fixtures/README.md](fixtures/README.md) — эталонные EPUB/FB2 для парсеров и bake-off перевода
+- [fixtures/README.md](fixtures/README.md) — layout для локальных EPUB/FB2 и golden JSON (книги в git не хранятся)
 - [openspec/specs/](openspec/specs/) — спецификации возможностей (library, import, translation, reader, themes)
 - [AGENTS.md](AGENTS.md) — правила для агентов и разработчиков
-
-## Образцы книг
-
-В корне репозитория и в `fixtures/` лежат тестовые EPUB/FB2 (AO3, Ficbook, повреждённые meta для регрессии). Они нужны для парсеров, golden-тестов и сравнения качества перевода.

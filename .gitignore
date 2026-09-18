@@ -19,3 +19,20 @@ dist/
 
 # Kotlin
 *.kotlin_module
+
+# Sample books (local only, not in git)
+*.epub
+*.fb2
+
+# Screenshots and UI capture artifacts
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# E2E / smoke dumps
+docs/analysis/e2e-run/
+fixtures/smoke/shots/
+fixtures/smoke/notes-snippet.txt
+fixtures/ao3/
+fixtures/ficbook/
